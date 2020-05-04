@@ -1,0 +1,102 @@
+<div class="obg-m-multi-game-launcher-game ng-star-inserted"><!----><obg-game-view-container class="obg-game-view-container ng-star-inserted"><obg-game-frame-container class="obg-game-frame"><!----><div trustredirects="" class="obg-game-frame-container-target" id="sandbox-2"><iframe webkitallowfullscreen=" " mozallowfullscreen=" " allowfullscreen="" frameborder="0" allowtransparency="true" allow="autoplay" auto=" " scrolling="no" height="100%" width="100%" sandbox="allow-same-origin allow-scripts allow-forms allow-popups" srcdoc="
+<html>
+<head>
+<script type=&quot;text/javascript&quot;>
+	let obgGlobals = {
+		sendChannel: undefined,
+		origin: &quot;https://www.betsson.com&quot;,
+		instanceId: &quot;sandbox-3&quot;
+	};
+
+	(function(document, window, obgGlobals) {
+		try {
+			let _channel = new MessageChannel();
+
+			function scriptInject(id, params) {
+				const script = document.createElement(&quot;script&quot;);
+				script.src = params.src;
+				script.id = params.id;
+				script.onload = function () {
+					obgGlobals.sendChannel.postMessage({ id: id, command: &quot;[Sandbox Script] Inject Success&quot;, params: {} });
+				};
+				script.onerror = function(error) {
+					obgGlobals.sendChannel
+						.postMessage({ id: id, command: &quot;[Sandbox Script] Inject Failed&quot;, params: { error: error } });
+				};
+				document.querySelector(&quot;head&quot;).appendChild(script);
+			}
+
+			function codeExecute(id, params) {
+				if (!params || !params.code) {
+					obgGlobals.sendChannel
+						.postMessage({ id: id, command: &quot;[Sandbox Code] Execute Failed&quot;, params: { error: &quot;missing params&quot; } });
+					return;
+				}
+
+				try {
+					// this code is for presentation purposes
+					const escapedCode = params.code.replace('<script type=&quot;text/javascript&quot;>', &quot;&quot;).replace('</scr', &quot;&quot;).replace('ipt>', &quot;&quot;);
+					const promiseBody = eval(&quot;(&quot; + escapedCode + &quot;)&quot;);
+					new Promise(promiseBody).then(() => {
+						obgGlobals.sendChannel.postMessage({ id: id, command: &quot;[Sandbox Code] Execute Success&quot;, params: {} });
+					}).catch(error => {
+						obgGlobals.sendChannel
+							.postMessage({ id: id, command: &quot;[Sandbox Code] Execute Failed&quot;, params: { error: error.message } });
+					})
+				} catch (error) {
+					obgGlobals.sendChannel
+						.postMessage({ id: id, command: &quot;[Sandbox Code] Execute Failed&quot;, params: { error: error.message } });
+				}
+			}
+
+			_channel.port1.onmessage = event => {
+				if (!event || !event.data || !event.isTrusted) {
+					return;
+				}
+
+				const id = event.data.id;
+				const command = event.data.command;
+				const params = event.data.params;
+				const origin = event.origin;
+
+				switch (command) {
+					case &quot;[Sandbox Initialize] Success&quot;:
+						obgGlobals.sendChannel = event.ports[0];
+						break;
+
+					case &quot;[Sandbox Script] Inject&quot;:
+						scriptInject(id, params, origin);
+						break;
+
+					case &quot;[Sandbox Code] Execute&quot;:
+						codeExecute(id, params, origin);
+						break;
+				}
+			};
+
+			window.parent.postMessage({
+				id: obgGlobals.instanceId,
+				command: &quot;[Sandbox Initialize] Success&quot;,
+				params: {}
+			}, obgGlobals.origin, [_channel.port2]);
+		} catch (error) {
+			window.parent.postMessage({
+				id: obgGlobals.instanceId,
+				command: &quot;[Sandbox Initialize] Failed&quot;,
+				params: {
+					error: error.message
+				}
+			}, obgGlobals.origin);
+		}
+	})(document, window, obgGlobals);
+</script>
+<style>
+html, body { width: 100%; height: 100%; overflow: hidden; margin: 0; background-color: #000; }
+iframe { width: 100% !important; height: 100% !important; }
+</style>
+</head>
+<body>
+	<div id=&quot;sandbox-2&quot;></div>
+</body>
+</html>
+"></iframe></div><!----></obg-game-frame-container><!----><!----><!----></obg-game-view-container><!----><!----><!----><!----></div>
