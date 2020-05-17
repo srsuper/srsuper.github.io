@@ -1,0 +1,350 @@
+Skip to content
+Search or jump to…
+
+Pull requests
+Issues
+Marketplace
+Explore
+ 
+@srsuper 
+yukinashi
+/
+line-liff-design
+1
+00
+ Code
+ Issues 0
+ Pull requests 0 Actions
+ Projects 0
+ Wiki
+ Security 0
+ Insights
+line-liff-design/liff-template.html
+@yukinashi yukinashi Rename helpliff.html to liff-template.html
+49b4605 on Sep 9, 2019
+323 lines (305 sloc)  8.59 KB
+  
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="theme-color" content="#FFFFFF">
+  <meta name="msapplication-navbutton-color" content="#FFFFFF">
+  <meta name="apple-mobile-web-app-status-bar-style" content="pink">
+  <meta name="viewport" content="width=360,initial-scale=1">
+  <style>
+    *, *:before, *:after {
+    	-webkit-box-sizing: border-box;
+    	        box-sizing: border-box;
+    margin: 0px;
+        padding: 0px;
+    
+    }
+    .cp_cssslider {
+    	width: 352px;
+    	padding-top: 280px; 
+    	position: relative;
+    	margin: 2em auto;
+    	text-align: center;
+    }
+    .cp_cssslider > .page {
+    	position: absolute;
+    	left: 0px;
+    	top: -15px;
+    	width: 352px;
+    	height: 280px; 
+    	transition: all 0.5s;
+    	border-radius: 3px;
+    	box-shadow:0px 0px 5px 0px rgba(0,0,0,0.3);
+    }
+    
+    .page .scroll {
+    	width: 352px;
+    	height: 280px; 
+          overflow:scroll;
+    	border-radius: 3px;
+    	box-shadow:0px 0px 5px 0px rgba(0,0,0,0.3);
+    }
+    
+    
+    .button{
+    text-decoration: none;
+    outline: none;
+    -webkit-tap-highlight-color: rgba(0,0,215,0.20); 
+    color:#000000;
+    }
+    
+    
+    .page .box{
+    margin: 0.5em 3em;
+    }
+    .page .title{
+    font-size:20px;
+    text-align: left;
+    color:#000000;
+    }
+    .page .text{
+    font-size:12px;
+    color:#939393;
+    text-align: right;
+    }
+    
+    .cp_cssslider input[name='cp_switch'] {
+    	display: none;
+    }
+    /* サムネイル */
+    .cp_cssslider label {
+    	margin: 0px 5px 0 5px;
+    	border: 2px solid #ffffff;
+    	display: inline-block;
+    	cursor: pointer;
+    	transition: all 0.5s ease;
+    	opacity: 0.6;
+    	border-radius: 3px;
+    }
+    .cp_cssslider label:hover {
+    	opacity: 0.9;
+    }
+    .cp_cssslider label .menu {
+    	display: block;
+    	border-radius: 2px;
+    }
+    .cp_cssslider input[name='cp_switch']:checked + label {
+    	border: 2px solid #FF7043;
+    	opacity: 1;
+    
+    }
+    .cp_cssslider input[name='cp_switch'] ~ .page {
+    	opacity: 0;
+    width: 0px;
+    	height: 0px; 
+    
+    }
+    .cp_cssslider input[name='cp_switch']:checked + label + .page {
+    	opacity: 1;
+    
+    }
+    .cp_cssslider input[name='cp_switch'] ~ .page .scroll {
+    width: 0px;
+    	height: 0px; /* 画像の高さ */
+    
+    }
+    .cp_cssslider input[name='cp_switch']:checked ~ .page .scroll {
+    width: 352px;
+    	height: 280px; /* 画像の高さ */
+    
+    }
+    .cp_cssslider input[name='cp_switch']:checked + .page {
+    width: 352px;
+    	height: 280px; /* 画像の高さ */
+    
+    }
+    
+    
+    
+    hr {
+    height: 1px;
+     background-color: #5F5F5F;
+     
+     border: none;
+    margin: auto 0.5em;
+    }
+  </style>
+</head>
+<body>
+  <div class="cp_cssslider"> <input type="radio" name="cp_switch" id="photo1" checked/> <label for="photo1"><div class="menu">talkhelp</div></label>
+    <div class="page">
+      <div class="scroll">
+        <a href="#" onclick="sendmessage('speed')" class="button">
+          <div class="box">
+            <div class="title">
+              <p>speed</p>
+            </div>
+            <div class="text">
+              <p>botの速度を測定します</p>
+            </div>
+          </div>
+        </a>
+        <hr />
+        <a href="#" onclick="sendmessage('speed')" class="button">
+          <div class="box">
+            <div class="title">
+              <p>speed</p>
+            </div>
+            <div class="text">
+              <p>botの速度を測定します</p>
+            </div>
+          </div>
+        </a>
+        <hr />
+        <a href="#" onclick="sendmessage('speed')" class="button">
+          <div class="box">
+            <div class="title">
+              <p>speed</p>
+            </div>
+            <div class="text">
+              <p>botの速度を測定します</p>
+            </div>
+          </div>
+        </a>
+        <hr /> </div>
+    </div> <input type="radio" name="cp_switch" id="photo2" /> <label for="photo2"><div class="menu">talkhelp</div></label>
+    <div class="page">
+      <div class="scroll">
+        <a href="#" onclick="sendmessage('speed')" class="button">
+          <div class="box">
+            <div class="title">
+              <p>speed</p>
+            </div>
+            <div class="text">
+              <p>botの速度を測定します</p>
+            </div>
+          </div>
+        </a>
+        <hr />
+        <a href="#" onclick="sendmessage('speed')" class="button">
+          <div class="box">
+            <div class="title">
+              <p>speed</p>
+            </div>
+            <div class="text">
+              <p>botの速度を測定します</p>
+            </div>
+          </div>
+        </a>
+        <hr />
+        <a href="#" onclick="sendmessage('speed')" class="button">
+          <div class="box">
+            <div class="title">
+              <p>speed</p>
+            </div>
+            <div class="text">
+              <p>botの速度を測定します</p>
+            </div>
+          </div>
+        </a>
+        <hr /> </div>
+    </div> <input type="radio" name="cp_switch" id="photo3" /> <label for="photo3"><div class="menu">grouphelp</div></label>
+    <div class="page">
+      <div class="scroll">
+        <a href="#" onclick="sendmessage('speed')" class="button">
+          <div class="box">
+            <div class="title">
+              <p>speed</p>
+            </div>
+            <div class="text">
+              <p>botの速度を測定します</p>
+            </div>
+          </div>
+        </a>
+        <hr />
+        <a href="#" onclick="sendmessage('speed')" class="button">
+          <div class="box">
+            <div class="title">
+              <p>speed</p>
+            </div>
+            <div class="text">
+              <p>botの速度を測定します</p>
+            </div>
+          </div>
+        </a>
+        <hr />
+        <a href="#" onclick="sendmessage('speed')" class="button">
+          <div class="box">
+            <div class="title">
+              <p>speed</p>
+            </div>
+            <div class="text">
+              <p>botの速度を測定します</p>
+            </div>
+          </div>
+        </a>
+        <hr /> </div>
+    </div> <input type="radio" name="cp_switch" id="photo4" /> <label for="photo4"><div class="menu">messagehelp</div></label>
+    <div class="page">
+      <div class="scroll">
+        <a href="#" onclick="sendmessage('speed')" class="button">
+          <div class="box">
+            <div class="title">
+              <p>speed</p>
+            </div>
+            <div class="text">
+              <p>botの速度を測定します</p>
+            </div>
+          </div>
+        </a>
+        <hr />
+        <a href="#" onclick="sendmessage('speed')" class="button">
+          <div class="box">
+            <div class="title">
+              <p>speed</p>
+            </div>
+            <div class="text">
+              <p>botの速度を測定します</p>
+            </div>
+          </div>
+        </a>
+        <hr />
+        <a href="#" onclick="sendmessage('speed')" class="button">
+          <div class="box">
+            <div class="title">
+              <p>speed</p>
+            </div>
+            <div class="text">
+              <p>botの速度を測定します</p>
+            </div>
+          </div>
+        </a>
+        <hr /> </div>
+    </div> <input type="radio" name="cp_switch" id="photo5" /> <label for="photo5"><div class="menu">analytics</div></label>
+    <div class="page">
+      <div class="scroll">
+        <a href="#" onclick="sendmessage('speed')" class="button">
+          <div class="box">
+            <div class="title">
+              <p>speed</p>
+            </div>
+            <div class="text">
+              <p>botの速度を測定します</p>
+            </div>
+          </div>
+        </a>
+        <hr />
+        <a href="#" onclick="sendmessage('speed')" class="button">
+          <div class="box">
+            <div class="title">
+              <p>speed</p>
+            </div>
+            <div class="text">
+              <p>botの速度を測定します</p>
+            </div>
+          </div>
+        </a>
+        <hr />
+        <a href="#" onclick="sendmessage('speed')" class="button">
+          <div class="box">
+            <div class="title">
+              <p>speed</p>
+            </div>
+            <div class="text">
+              <p>botの速度を測定します</p>
+            </div>
+          </div>
+        </a>
+        <hr /> </div>
+    </div>
+  </div>
+  <script src="https://d.line-scdn.net/liff/1.0/sdk.js"></script>
+  <script>
+    var message;
+    function sendmessage(message) {
+        liff.sendMessages([{
+                type: 'text',
+                text: message
+            }]);
+    
+    }
+  </script>
+</body>
+</html>
+❌꧁༺ǿ  © 2020 Panutchakorn@SKT. ༻꧂❌
