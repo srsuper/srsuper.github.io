@@ -1,0 +1,61 @@
+html {
+    font-family: sans-serif;
+}
+#heading_tag {
+    position:fixed;
+    background-color: lightblue;
+    top:-3%;
+    width:100%;
+    padding:5px;
+    color:black;
+}
+
+li {
+    padding:5px;
+    margin-bottom:10px;
+
+}
+li:hover {
+    background-color:#F5F5F5;
+}
+.priority-high {
+    color:red;
+}
+.priority-medium {
+    color:orange;
+}
+.priority-low {
+    color:green;
+}
+.pomodora-estimate {
+    color:black;
+    background-color: lightgray;
+    font-weight: bold;
+    padding:5px 10px 5px 10px;
+    border-radius: 50px;
+    font-size: 14px;
+
+
+#add-new-todo-button {
+   color:white;
+    background-color:blue;
+    font-weight: bold;
+    padding:5px 10px 5px 10px;
+    border-radius: 50px;
+    font-size: 15px;
+    margin-top:10px;
+}
+#color-choice {
+    color:green;
+}
+#add-new-todo-button:active {
+    box-shadow:1px 1px 1px;
+  transform: translateY(4px);
+}
+
+
+
+
+
+
+

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+
+        <title>Adrian's To-do list</title>
+
+        <link rel="stylesheet" href="/index.css" type="text/css" />
+
+        <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+
+        <link href="/index.js" type="text/javascript" />
+
+       <script>
+
+           $(document).ready(function(){
+
+               $("#add-new-todo-button").click(function(){
+
+                   var newTodoBlock = $(this).closest("#new-todo-block")
+
+                   var newTodo = newTodoBlock.find("#new-todo-description")
+
+                   var pomodooroEstimate = newTodoBlock.find("#new-todo-pomodoro-estimate")
+
+                   
+
+                   
+
+                   $("ul").append("<li><input type ='checkbox'/>" + newTodo.val() + "<span class='pomodoro-estimate'>" + pomodooroEstimate.val() + " pomodoros</span> </li>")
+
+                   
+
+                   newTodo.val("")
+
+                   pomodooroEstimate.val("")
+
+               })
+
+                 
+
+
+
+               })
+
+       </script> 
+
+    </head>
+
+ 
+
+    <body>
+
+        <link rel="stylesheet" href="/index.css" type="text/css" />
+
+        
+
+        <h1 id="heading_tag">Adrian's to-do list
+        
+        <select>
+       <a href="/show.html"> <option class="dropdown_menu" value="folder_1">Account 2</option></a>
+        </select
+        ></h1>
+
+    <ul >
+        
+    <li>
+        <input type="checkbox">
+    </li>
+
+    <li>
+
+      <input type="checkbox">  
+
+     <a href="/show.html">prepare for workshop. <span class="pomodoro-estimate">2 pomodoros</span></a>
+
+    </li>
+
+    <li class="priority-high">
+
+        <input type="checkbox">  
+
+        <a href="/show2.html">Do Homework <span class="pomodoro-estimate">2 pomodoros</span></a>
+
+        </li>
+
+    <li class="priority-medium">
+
+        <input type="checkbox">  
+
+        <a href="/show3.html">Complete Todo list <span class="pomodoro-estimate">3 pomodoros</span></a>
+
+        </li>
+
+    <li class="priority-low">
+
+        <input type="checkbox">  
+
+        <a href="/show4.html">Study Html Tags <span class="pomodoro-estimate"> pomodoros</span></a>
+
+        </li>
+
+    </ul>
+
+    <div id="new-todo-block">
+
+    <input type="text" id="new-todo-description" placeholder="task">
+
+    <input type="numbers" id="new-todo-pomodoro-estimate" placeholder="pomodoros">
+
+    <input type="submit" id="add-new-todo-button"  value="add to-do">
+
+    </div>
+
+    </body>
+
+</html>
