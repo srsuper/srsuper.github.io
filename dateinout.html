@@ -1,81 +1,66 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8"/>
-    <title></title>
-    <script src="https://d.line-scdn.net/liff/1.0/sdk.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script>
-        //init LIFF
-        function initializeApp(data) {
-            //取得用戶身分
-            var userid = data.context.userId;
-            //
-            // ...
-            //
-        }
-
-        //新增
-        function AddRecord(userid, tel, DateTimein, DateTimeout) {
-            //資料檢查
-            if (userid == '' || tel == '' || tel.includes('(') || tel.includes(')')) {
-                alert('ข้อมูลไม่สมบูรณ์!');
-                return;
-            }
-            //組出新增字串
-            var msg = "/add/";
-            msg = msg + userid + "/";
-            msg = msg + tel + "/";
-            msg = msg + DateTimein + "/";
-            msg = msg + DateTimeout + "/";
-            //ส่งข้อความไปยัง LINE ในฐานะผู้ใช้ Bot
-            liff.sendMessages([
-                {
-                    type: 'text',
-                    text: msg
-                }
-            ])
-                .then(() => {
-                    //建立成功，關閉視窗
-                    liff.closeWindow();
-                });
-        }
-
-        $(document).ready(function () {
-            //init LIFF
-            liff.init(function (data) {
-                initializeApp(data);
-            });
-
-
-
-            //按下新增鈕
-            $('#btn_addRecord').click(function (e) {
-                //新增
-                AddRecord($('#txb_userid').val(), $('#txb_tel').val(), $('#txb_DateTimein').val(), $('#txb_DateTimeout').val());
-            });
-        });
-    </script>
-</head>
-<body>
-    <div class="row" style="margin: 10px">
-        <div class="col-12" style="margin: 10px">
-            <label>Name</label>
-            <input type="text" id="txb_userid" class="form-control" /> 
-            <br />
-            <label>Tel</label>
-            <input type="text" id="txb_tel" class="form-control" />            
-            <br />
-            <label>Check-IN</label>
-            <input type="date" id="txb_DateTimein" value="" class="form-control" />
-            <br />
-            <label>Check-OUT</label>
-            <input type="date" id="txb_DateTimeout" class="form-control" />
-            <br />
-            <button class="btn btn-success btn-block" id="btn_addRecord">Send</button>
-        </div>
-    </div>
-</body>
-</html>
+ <!DOCTYPE html>
+ <html>
+ <head>
+     <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <title>LIFF 表單測試</title>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  </head>
+ <body>
+     <div class="row" style="margin: 10px">
+         <div class="col-12" style="margin: 10px">
+             <labelName</label>
+             <input type="text" id="name" class="form-control" />
+             <br />
+             <label>Tel</label>
+             <input type="text" id="tel" class="form-control" />
+             <br />
+             <label>Check-IN</label>
+             <input type="date" id="datetimein" value="" class="form-control" />
+             <br />
+             <label>Check-OUT</label>
+             <input type="date" id="datetimeout" value="" class="form-control" />
+             <br />
+             <button class="btn btn-success btn-block" id="sure">Send</button>
+         </div>
+     </div>
+ 
+     <script src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
+ <script>
+         function initializeLiff(myLiffId) {
+             liff
+                 .init({
+                     liffId: myLiffId
+                 });
+         }
+ 
+  function pushMsg(pname, pdatatimein, pdatetimeout) {
+   if (pname == '' || ptel == '' || pdatatimein == '' || pdatetimeout == '') {  //資料檢查
+    alert('每個項目都必須輸入！');
+    return;
+   }
+   var msg = "###";  //回傳訊息字串
+   msg = msg + pname + "/";
+   msg = msg + ptel + "/";
+   msg = msg + pdatatimein + "/";
+   msg = msg + pdatetimeout;
+   liff.sendMessages([  //推播訊息
+    { type: 'text',
+      text: msg
+    }
+   ])
+    .then(() => {
+     liff.closeWindow();  //關閉視窗
+    });
+  }
+ 
+  $(document).ready(function () {
+   initializeLiff('1654113772-7vxy8JzR');
+   $('#sure').click(function (e) {  //按下確定鈕
+    pushMsg($('#name').val(), $('#tel').val(), $('#datetimin').val(), $('#datetimeout').val());
+   });
+  });
+ </script>
+ </body>
+ </html>
