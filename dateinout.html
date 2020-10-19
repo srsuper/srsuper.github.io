@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title></title>
+    <script src="https://d.line-scdn.net/liff/1.0/sdk.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script>
+        //init LIFF
+        function initializeApp(data) {
+            //取得用戶身分
+            var userid = data.context.userId;
+            //
+            // ...
+            //
+        }
+
+        //新增
+        function AddRecord(amount, Type, Memo, DateTime) {
+            //資料檢查
+            if (amount == '' || Type == '' || Type.includes('(') || Type.includes(')')) {
+                alert('ข้อมูลไม่สมบูรณ์!');
+                return;
+            }
+            //組出新增字串
+            var msg = "/add/";
+            msg = msg + amount + "/";
+            msg = msg + Type + "/";
+            msg = msg + Memo + "/";
+            msg = msg + DateTime + "/";
+            //ส่งข้อความไปยัง LINE ในฐานะผู้ใช้ Bot
+            liff.sendMessages([
+                {
+                    type: 'text',
+                    text: msg
+                }
+            ])
+                .then(() => {
+                    //建立成功，關閉視窗
+                    liff.closeWindow();
+                });
+        }
+
+        $(document).ready(function () {
+            //init LIFF
+            liff.init(function (data) {
+                initializeApp(data);
+            });
+
+
+            //當選擇的消費分類改變時
+            $('#sel_type').change(function () {
+                //把值填入textbox
+                $('#txb_type').val($('#sel_type').find(":selected").text().trim());
+            });
+
+            //按下新增鈕
+            $('#btn_addRecord').click(function (e) {
+                //新增
+                AddRecord($('#txb_amount').val(), $('#txb_type').val(), $('#txb_memo').val(), $('#txb_datetime').val());
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="row" style="margin: 10px">
+        <div class="col-12" style="margin: 10px">
+            <label>金額</label>
+            <input type="number" id="txb_amount" class="form-control" />
+            <br />
+            <label>分類</label>
+            <input type="text" id="txb_type" class="form-control" />
+            <select id="sel_type" class="form-control">
+                <option selected>(กรุณาเลือกประเภทการบริโภคหรือป้อนโดยตรงในฟิลด์ด้านบน)</option>
+                <option>ค่าครองชีพ</option>
+                <option>ความบันเทิง</option>
+                <option>มื้ออาหาร</option>
+                <option>การขนส่ง</option>
+                <option>อื่น ๆ</option>
+            </select>
+            <br />
+            <label>วันที่บริโภค</label>
+            <input type="date" id="txb_datetime" value="" class="form-control" />
+            <br />
+            <label>ข้อสังเกต (วัตถุประสงค์)</label>
+            <input type="text" id="txb_memo" class="form-control" />
+            <br />
+            <button class="btn btn-success btn-block" id="btn_addRecord">ติดตั้ง</button>
+        </div>
+    </div>
+</body>
+</html>
