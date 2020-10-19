@@ -10,7 +10,7 @@
  <body>
      <div class="row" style="margin: 10px">
          <div class="col-12" style="margin: 10px">
-             <labelName</label>
+             <label>Name</label>
              <input type="text" id="name" class="form-control" />
              <br />
              <label>Tel</label>
@@ -35,7 +35,7 @@
                  });
          }
  
-  function pushMsg(pname, pdatatimein, pdatetimeout) {
+  function pushMsg(pname, ptel, pdatatimein, pdatetimeout) {
    if (pname == '' || ptel == '' || pdatatimein == '' || pdatetimeout == '') {  //資料檢查
     alert('每個項目都必須輸入！');
     return;
