@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html>
+<title>Softway 24hr-Booking</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+
+<!------------------------------Script-------------------------------------------------------->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<!-- Line LIFF ------------------>
+<script src="https://d.line-scdn.net/liff/1.0/sdk.js"></script>
+<!-- Bootstrap core JavaScript and jquery-->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<!--影響 Close < > 的切換icon-->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<!--引用plugin的css(自行到作者GitHub下載)-->
+<link rel="stylesheet" href="css/bootstrap-material-datetimepicker.css" />
+<!-- Datepicker ----------------->
+<script src="https://use.fontawesome.com/releases/v5.0.9/js/all.js"></script>
+<script src="https://use.fontawesome.com/releases/v5.0.9/js/v4-shims.js"></script>
+<!--  引用jQuery------------------>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<!--此plugin會影響語系-------------->
+<script type="text/javascript" src="https://momentjs.com/downloads/moment-with-locales.js"></script>
+<!--引用plugin的js----------------->
+<script src="js/bootstrap-material-datetimepicker.js"></script>
+
+
+
+<style type="text/css">
+  table.dtp-picker-days {
+    font-size: 120%;
+  }
+
+  .dtp-buttons>button.btn {
+    border: none;
+    border-radius: 15px;
+    position: relative;
+    box-shadow: none;
+    color: rgba(0, 0, 0, 0.87);
+    padding: 5px 40px;
+    font-size: 20px;
+    margin: 5px 5px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0;
+    will-change: box-shadow, transform;
+    transition: box-shadow 0.2s cubic-bezier(0.4, 0, 1, 1), background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1), color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    outline: 0;
+    cursor: pointer;
+    text-decoration: none;
+    background: transparent;
+  }
+
+  .dtp-buttons>button.btn:hover,
+  .dtp-buttons>button.btn:focus {
+    background-color: rgba(153, 153, 153, 0.2);
+  }
+
+  /*我自己多寫這個*/
+  .dtp-picker-calendar>table {
+    width: 100%;
+  }
+
+  body,
+  h1 {
+    font-family: "Raleway", sans-serif
+  }
+
+  body,
+
+  html {
+    height: 100%
+  }
+
+  .container {
+    display: flex;
+    padding: 4px
+  }
+
+  .left-half {
+    flex: 1;
+    width: 100%;
+  }
+
+  .right-half {
+    flex: 1;
+    width: 100%;
+  }
+</style>
+
+
+<body>
+  <!-- profile w3-display-topleft-->
+  <div class="w3-center w3-animate-top w3-padding-small">
+    <img id="img" src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Cat03.jpg" class="w3-circle"
+      style="width:115px">
+    <p style="font-size:135%;"><b id="displayname"></b></p>
+    <hr>
+    <input id="userid" style="display: none" value="">
+  </div>
+
+  <div id='spinner' class="w3-center"><img src="images/spinner.svg" /></div>
+
+  <!-- Name & Phone -->
+  <div id="memberform" class="w3-display-container w3-text-white w3-padding" style="display: none">
+    <div class="w3-container w3-white w3-animate-top w3-padding-small">
+      <font size="4">
+        <label><b>ชื่อ</b></label>
+        <input id="username" class="w3-input w3-border w3-round-large" type="text" placeholder="ตัวอย่าง : 王ท่าน明"
+          value='' required>
+      </font>
+      <br>
+      <font size="4">
+        <label><b>ผูกโทรศัพท์</b></label>
+        <input id="phone" class="w3-input w3-border w3-round-large" type="tel" placeholder="ตัวอย่าง : 0900123456"
+          autocomplete="off"  value='' required>
+      </font>
+
+      <font size="3">
+        <input type='checkbox' id="privacy_policy" class="w3-check" style="min-height:20px;min-width:20px;" checked>
+        <label>ฉันได้อ่านและยอมรับ<a title="นโยบายความเป็นส่วนตัวของ SR SUNSHINE HOTEL"
+            onclick="document.getElementById('modal').style.display = 'block' ">
+            นโยบายความเป็นส่วนตัวของ SR SUNSHINE HOTEL</a></label></p>
+      </font>
+
+
+      <div id='modal' class="w3-modal">
+        <span onclick="document.getElementById('modal').style.display='none'"
+          class="w3-button w3-teal w3-xlarge w3-display-topright">×</span>
+        <div class="w3-display-container mySlides">
+          <img src="images/0001.jpg" style="width:100%;">
+        </div>
+        <div class="w3-display-container mySlides">
+          <img src="images/0002.jpg" style="width:100%">
+        </div>
+        <div class="w3-display-container mySlides">
+          <img src="images/0003.jpg" style="width:100%">
+        </div>
+
+
+        <!-- Slideshow next/previous buttons -->
+        <div class="w3-container w3-dark-grey w3-padding w3-xlarge">
+          <div class="w3-left" onclick="plusDivs(-1)"><i class="fa fa-arrow-circle-left w3-hover-text-teal"></i></div>
+          <div class="w3-right" onclick="plusDivs(1)"><i class="fa fa-arrow-circle-right w3-hover-text-teal"></i></div>
+        </div>
+
+      </div>
+
+
+
+
+
+      <font size='4'>
+        <button name="phone_button" class="w3-btn w3-round-large w3-block w3-teal w3-padding-16 w3-section w3-right"
+          onclick="nextClick_2()" disabled='disabled'> สร้างสมาชิกและจองที่นั่ง <span
+            class="glyphicon glyphicon-chevron-right"></span>
+        </button>
+      </font>
+
+    </div>
+  </div>
+
+
+
+  <!-- Time -->
+  <div id="time" class="w3-display-container w3-text-white w3-padding" style="display: none">
+    <div class="w3-container w3-white w3-animate-right w3-padding-small">
+
+
+      <div class="container">
+        <div class="left-half" style="width:100%;">
+          <font size="4">
+            <label><i class="fa fa-male"></i> ผู้ใหญ่</label>
+            <select class="select form-control" style='font-size:18px; height:40px;' type="number" value="" id="adult"
+              required>
+              <!-- <option value="" selected disabled hidden>請選擇人數</option> -->
+              <option value="1">1 ท่าน</option>
+              <option value="2" selected>2 ท่าน</option>
+              <option value="3">3 ท่าน</option>
+              <option value="4">4 ท่าน</option>
+              <option value="5">5 ท่าน</option>
+              <option value="6">6 ท่าน</option>
+              <option value="7">7 ท่าน</option>
+              <option value="8">8 ท่าน</option>
+              <option value="10">10 ท่าน</option>
+              <option value="11">11 ท่าน</option>
+              <option value="12">12 ท่าน</option>
+              <option value="13">13 ท่าน</option>
+              <option value="14">14 ท่าน</option>
+              <option value="15">15 ท่าน</option>
+              <option value="16">16 ท่าน</option>
+              <option value="17">17 ท่าน</option>
+              <option value="18">18 ท่าน</option>
+              <option value="19">19 ท่าน</option>
+              <option value="20">20 ท่าน</option>
+            </select>
+          </font>
+        </div>
+        <div class="right-half" style="width:100%;">
+          <font size="4">
+            <label><i class="fa fa-child"></i> เด็ก</label>
+            <select class="select form-control" style='font-size:18px; height:40px;' type="number" value=""
+              id="children" required>
+              <!-- <option value="0" selected disabled hidden>請選擇人數</option> -->
+              <option value="0" selected>0 ท่าน</option>
+              <option value="1">1 ท่าน</option>
+              <option value="2">2 ท่าน</option>
+              <option value="3">3 ท่าน</option>
+              <option value="4">4 ท่าน</option>
+              <option value="5">5 ท่าน</option>
+              <option value="6">6 ท่าน</option>
+              <option value="7">7 ท่าน</option>
+              <option value="8">8 ท่าน</option>
+              <option value="9">9 ท่าน</option>
+              <option value="10">10 ท่าน</option>
+            </select>
+          </font>
+        </div>
+      </div>
+
+      <br>
+
+      <font size="4">
+        <label><i class="fa fa-calendar"></i> วันที่</label>
+        <input class="w3-input w3-border w3-round-large" id="date" type="text" value="" placeholder="โปรดเลือกวันที่" required>
+      </font>
+      <p> # ร้านนี้เปิดให้จองเมื่อ <b> สามวันที่แล้ว </b> ขออภัยในความไม่สะดวก! </p>
+
+
+      <br>
+
+      <font size="4">
+        <label><span class="glyphicon glyphicon-cutlery"> <b>เวลาอาหาร</b></label>
+      </font>
+      <div class="w3-center w3-bar">
+        <input id="session" style="display: none" value="">
+        <button type="button" id="noonTime" name="session" class="w3-btn w3-border w3-round-large w3-xlarge"
+          onClick="noonClick('timeForm_1','timeForm_2', 'noonTime', 'nightTime')" value="noon" disabled>อาหารจีน</button>
+        <button type="button" id="nightTime" name="session" class="w3-btn w3-border w3-round-large w3-xlarge"
+          onClick="nightClick('timeForm_1','timeForm_2', 'noonTime', 'nightTime')" value="night" disabled>อาหารเย็น</button>
+      </div>
+
+      <hr>
+      <div id="entiretime" style="display: none"></div>
+      <!----早上時段----->
+      <div style="display:none" id="timeForm_1">
+        <div id="start" class="w3-center w3-bar">
+          <p id="noon_num" style="font-size:15pt;"></p><br>
+          <button type="button" name="startTime" class="w3-btn w3-border w3-round-large w3-xlarge"
+            onClick="timeClick(this)" value="11" disabled>11:00</button>
+          <button type="button" name="startTime" class="w3-btn w3-border w3-round-large w3-xlarge"
+            onClick="timeClick(this)" value="11.5" disabled>11:30</button>
+          <br>
+          <button type="button" name="startTime" class="w3-btn w3-border w3-round-large w3-xlarge"
+            onClick="timeClick(this)" value="12" disabled>12:00</button>
+          <button type="button" name="startTime" class="w3-btn w3-border w3-round-large w3-xlarge"
+            onClick="timeClick(this)" value="12.5" disabled>12:30</button>
+          <br>
+          <button type="button" name="startTime" class="w3-btn w3-border w3-round-large w3-xlarge"
+            onClick="timeClick(this)" value="13" disabled>13:00</button>
+          <button type="button" name="startTime" class="w3-btn w3-border w3-round-large w3-xlarge"
+            onClick="timeClick(this)" value="13.5" disabled>13:30</button>
+          <br>
+          <button type="button" id="entire1" name="entireTime" style="width:55%;"
+            class="w3-btn w3-border w3-round-large w3-xlarge" onClick="entire_timeClick(this)" value="true"
+            disabled>包場</button>
+        </div>
+      </div>
+
+      <!----晚上時段----->
+      <div style="display:none" id="timeForm_2">
+        <div id="start" class="w3-center w3-bar">
+          <p id="night_num" style="font-size:15pt;"></p><br>
+          <button type="button" name="startTime" class="w3-btn w3-border w3-round-large w3-xlarge"
+            onClick="timeClick(this)" value="17" disabled>17:00</button>
+          <button type="button" name="startTime" class="w3-btn w3-border w3-round-large w3-xlarge"
+            onClick="timeClick(this)" value="17.5" disabled>17:30</button>
+          <br>
+          <button type="button" name="startTime" class="w3-btn w3-border w3-round-large w3-xlarge"
+            onClick="timeClick(this)" value="18" disabled>18:00</button>
+          <button type="button" name="startTime" class="w3-btn w3-border w3-round-large w3-xlarge"
+            onClick="timeClick(this)" value="18.5" disabled>18:30</button>
+          <br>
+          <button type="button" name="startTime" class="w3-btn w3-border w3-round-large w3-xlarge"
+            onClick="timeClick(this)" value="19" disabled>19:00</button>
+          <button type="button" name="startTime" class="w3-btn w3-border w3-round-large w3-xlarge"
+            onClick="timeClick(this)" value="19.5" disabled>19:30</button>
+          <br>
+          <button type="button" id="entire2" name="entireTime" style="width:55%;"
+            class="w3-btn w3-border w3-round-large w3-xlarge" onClick="entire_timeClick(this)" value="true"
+            disabled>包場</button>
+        </div>
+      </div>
+
+      <p>#每週一公休(只接受包場) 包場專線 : <a href="tel:0936336233">0936-336233</a></p>
+      <p>「貼心提醒：若欲選按鈕無法點選，表示該時段人數เต็ม！」</p>
+
+      <font size='4'>
+        <button id="next" class="w3-btn w3-round-large w3-block w3-teal w3-padding-16 w3-section w3-right"
+          onclick="nextClick_1()" disabled>下一步 <span class="glyphicon glyphicon-chevron-right"></span></button>
+      </font>
+    </div>
+
+
+  </div>
+
+
+
+  <!-- Number & Price % Ps-->
+  <div id="member" class="w3-display-container w3-text-white w3-padding" style="display: none">
+    <input id="store_name" value="สำนักงานใหญ่" style="display: none">
+    <div class="w3-container w3-white w3-animate-right w3-padding-small">
+
+      <!-- <font size="4">
+        <label id='glyphicon glyphicon-calendar'></label>
+        <br>
+        <label id='glyphicon glyphicon-cutlery'></label>
+        <br>
+      </font> -->
+
+      <font size="4">
+        <label><i class="fa fa-usd"></i> ราคาต่อท่าน (จำเป็น)</label>
+        <br>
+        <input id="price" style="display: none" value="" required>
+        <input type="button" name="price" class="w3-btn w3-border w3-round-large w3-normal" value="$500"
+          onclick="priceClick(this)">
+        <input type="button" name="price" class="w3-btn w3-border w3-round-large w3-normal" value="$600"
+          onclick="priceClick(this)">
+        <input type="button" name="price" class="w3-btn w3-border w3-round-large w3-normal" value="$800"
+          onclick="priceClick(this)">
+        <input type="button" name="price" class="w3-btn w3-border w3-round-large w3-normal" value="$1000"
+          onclick="priceClick(this)">
+        <input type="button" name="price" class="w3-btn w3-border w3-round-large w3-normal" value="$1200"
+          onclick="priceClick(this)">
+
+      </font>
+
+      <div class="w3-section">
+        <font size="4">
+          <label><i class="fa fa-bell"></i> พฤติกรรมการกิน</label>
+          <br>
+          <input id="ps" style="display: none" value="">
+          <button type="button" class="w3-btn w3-border w3-round-large w3-normal" value="#ไม่มีวัว"
+            onclick="psClick(this)">ไม่มีวัว</button>
+          <button type="button" class="w3-btn w3-border w3-round-large w3-normal" value="#ไม่มีอาหารทะเล"
+            onclick="psClick(this)">ไม่มีอาหารทะเล</button>
+          <button type="button" class="w3-btn w3-border w3-round-large w3-normal" value="#อาหารมังสวิรัต"
+            onclick="psClick(this)">อาหารมังสวิรัต</button>
+          <br><br>
+          พิเศษพฤติกรรมการกิน<input id="otherps" type="text" class="w3-input w3-border w3-round-large" value="">
+        </font>
+      </div>
+
+    </div>
+    <font size='4'>
+      <button id="previous" class="w3-btn w3-round-large w3-block w3-dark-grey w3-padding w3-right"
+        onclick="prevClick()"><span class="glyphicon glyphicon-chevron-left"></span> 上一頁</button>
+      <button type="submit" id="sendbook"
+        class="w3-btn w3-round-large w3-block w3-teal w3-padding-16 w3-section w3-right" disabled>完成 <span
+          class="glyphicon glyphicon-ok"></span></button>
+    </font>
+
+  </div>
+
+  <!--script function -->
+  <script>
+    setTimeout(function checkmember() {
+      var userid = $('#userid').val();
+      data = {
+        'userid': userid,
+        'action': 'checkmember'
+      }
+
+      query_member(data)
+    }, 1000)
+
+    // Slideshow
+    var slideIndex = 1;
+    showDivs(slideIndex);
+
+    function plusDivs(n) {
+      showDivs(slideIndex += n);
+    }
+
+    function showDivs(n) {
+      var i;
+      var x = document.getElementsByClassName("mySlides");
+      
+      if (n > x.length) {
+        slideIndex = 1
+      }
+      if (n < 1) {
+        slideIndex = x.length
+      };
+      for (i = 0; i < x.length; i++) {
+        x[i].style.display = "none";
+      }
+      
+      x[slideIndex - 1].style.display = "block";
+      
+    }
+
+    function priceClick(x) {
+      var k = document.getElementsByName("price")
+      for (i = 0; i < k.length; i++) {
+        k[i].classList.remove("w3-teal")
+      }
+      if (x.classList.contains("w3-teal") == false) {
+        x.classList.add('w3-teal');
+        document.getElementById('price').value = x.value;
+        $("#sendbook").attr('disabled', false);
+      }
+    }
+
+    function noonClick(id_1, id_2, id_3, id_4) {
+      var x = document.getElementById(id_1);
+      var y = document.getElementById(id_2);
+      var a = document.getElementById(id_3);
+      var b = document.getElementById(id_4);
+      document.getElementById('noon_num').innerHTML = 'โปรดรอ.....';
+      $("button[name='startTime']").attr("disabled", true);
+      $("button[name='entireTime']").attr("disabled", true);
+
+      if (x.classList.contains("w3-show") == false) {
+        x.classList.add("w3-show");
+        y.classList.remove("w3-show");
+        a.innerHTML = "✓อาหารจีน"
+        b.innerHTML = "อาหารเย็น"
+        a.classList.add("w3-teal")
+        b.classList.remove("w3-teal");
+        document.getElementById('session').value = 'noon';
+        var noon = 'noon';
+        var booking_date = $('#date').val();
+        data = {
+          'time_session': noon,
+          'booking_date': booking_date,
+          'action': 'querying_num'
+        }
+        query_people(data);
+      
+      }
+
+    }
+
+    function nightClick(id_1, id_2, id_3, id_4) {
+      var x = document.getElementById(id_1);
+      var y = document.getElementById(id_2);
+      var a = document.getElementById(id_3);
+      var b = document.getElementById(id_4);
+      document.getElementById('night_num').innerHTML = 'โปรดรอ.....';
+      $("button[name='startTime']").attr("disabled", true);
+      $("button[name='entireTime']").attr("disabled", true);
+
+      if (y.classList.contains("w3-show") == false) {
+        y.classList.add("w3-show");
+        x.classList.remove("w3-show");
+        b.innerHTML = "✓อาหารเย็น"
+        a.innerHTML = "อาหารจีน"
+        b.classList.add("w3-teal")
+        a.classList.remove("w3-teal");
+        document.getElementById('session').value = 'night';
+        var night = 'night';
+        var booking_date = $('#date').val();
+        data = {
+          'time_session': night,
+          'booking_date': booking_date,
+          'action': 'querying_num'
+        }
+        query_people(data);
+
+      }
+    }
+
+    function timeClick(x) {
+      var k = document.getElementsByName("startTime")
+      var time_session = document.getElementById('session').val
+
+      for (i = 0; i < k.length; i++) {
+        k[i].classList.remove("w3-teal")
+        $("button[name='entireTime']").attr("disabled", true);
+      }
+      if (x.classList.contains("w3-teal") == false) {
+        x.classList.add('w3-teal');
+        document.getElementById('start').value = x.value;
+      } else {
+        x.classList.remove("w3-teal");
+        document.getElementById('start').value = "";
+      }
+      
+      if (document.getElementById('noon_num').innerHTML == ('ที่เหลืออยู่ ' + 16 + ' ที่นั่ง')) {
+        $("#entire1").attr("disabled", false);
+      }
+      if (document.getElementById('night_num').innerHTML == ('ที่เหลืออยู่ ' + 16 + ' ที่นั่ง')) {
+        $("#entire2").attr("disabled", false);
+      }
+    }
+
+    function entire_timeClick(x) {
+      if (x.classList.contains("w3-teal") == false) {
+        x.classList.add('w3-teal');
+        document.getElementById('entiretime').value = x.value;
+      } else {
+        x.classList.remove("w3-teal");
+        document.getElementById('entiretime').value = "";
+      }
+    }
+
+    function psClick(x) {
+      var p = document.getElementById("ps")
+
+      if (x.classList.contains("w3-teal") == false) {
+        x.classList.add("w3-teal")
+        p.value += x.value
+      } else {
+        x.classList.remove("w3-teal")
+        p.value -= x.val
+        if (isNaN(p.value)) {
+          p.value = ''
+        }
+      }
+
+    }
+
+    function nextClick_1() {
+      document.getElementById('time').style.display = 'none';
+      document.getElementById('member').style.display = 'block';
+      // if ($('#session').val() == 'noon') {
+      //   var s = '午餐'
+      // } else {
+      //   var s = 'อาหารเย็น'
+      // }
+      // document.getElementById('glyphicon glyphicon-calendar').innerHTML = "<span class='glyphicon glyphicon-calendar'>" +'：  '+ $('#date').val();
+      // document.getElementById('glyphicon glyphicon-cutlery').innerHTML = "<span class='glyphicon glyphicon-cutlery'>" +'：  '+ s +'  ';
+
+
+    }
+
+    function nextClick_2() {
+      document.getElementById('memberform').style.display = 'none';
+      document.getElementById('time').style.display = 'block'
+    }
+
+    function prevClick() {
+      document.getElementById('member').style.display = 'none';
+      document.getElementById('time').style.display = 'block';
+    }
+  </script>
+
+
+  <!--datetimepicker of parameter--->
+  <script type="text/javascript">
+    $(function () {
+      $('#date').bootstrapMaterialDatePicker({
+        lang: 'zh-tw',
+        time: false,
+        nowButton: false,
+        clearButton: false,
+        okText: '確認',
+        cancelText: '取消',
+        minDate: moment().add(3, 'day'),
+        disabledDays: [1],
+        format: 'YYYY-MM-DD (dd)'
+      });
+    });
+  </script>
+
+
+  <!-- script  Line jquery-->
+  <script>
+    function initializeApp(data) {
+      liff.getProfile().then(profile => {
+        var disname = {
+          'name': profile.displayName
+        };
+        disname_json = JSON.parse(JSON.stringify(disname.name))
+        $('#userid').val(data.context.userId); //data.context.userId
+
+        $('#img').attr('src', profile.pictureUrl);
+        $('#displayname').html(profile.displayName);
+
+      })
+    }
+    //ready
+    $(function () {
+      //init LIFF
+      liff.init(function (data) {
+        initializeApp(data);
+      });
+      //ButtonSendMsg
+
+      $('#sendbook').click(function () {
+        var start = parseFloat($("#start").val());
+        var entire = $('#entiretime').val();
+        var username = $('#username').val();
+        var time_session = $('#session').val();
+        //time
+        if (start - parseInt($("#start").val()) === 0) {
+          start = $("#start").val() + ":00";
+        } else {
+          start = parseInt($("#start").val()).toString() + ':' + ((start - parseInt($("#start").val())) * 60)
+            .toString();
+        }
+        //entire_time
+        if (entire != '') {
+          var entire_line = '(เช่าเหมาลำ)'
+        } else {
+          var entire_line = ''
+        }
+        //ps
+        if ($('#ps').val() + $('#otherps').val() == "") {
+          var ps = "ไม่";
+        } else {
+          var ps = $('#ps').val() + $('#otherps').val()
+        }
+        //time_session
+        if (time_session == 'noon') {
+          var session = 'อาหารจีน'
+        } else {
+          var session = 'อาหารเย็น'
+        }
+
+        liff.sendMessages([{
+            "type": "flex",
+            "altText": "Flex Message",
+            "contents": {
+              "type": "bubble",
+              "body": {
+                "type": "box",
+                "layout": "vertical",
+                "contents": [{
+                    "type": "text",
+                    "text": "👤 " + " การนัดหมายสำเร็จ",
+                    "size": "xl",
+                    "weight": "bold"
+                  },
+                  {
+                    "type": "box",
+                    "layout": "vertical",
+                    "spacing": "sm",
+                    "margin": "lg",
+                    "contents": [{
+                        "type": "box",
+                        "layout": "baseline",
+                        "spacing": "sm",
+                        "contents": [{
+                            "type": "text",
+                            "text": "การจองห้องพัก",
+                            "flex": 1,
+                            "size": "sm",
+                            "color": "#AAAAAA"
+                          },
+                          {
+                            "type": "text",
+                            "text": username + '(' + disname_json + ') ' + $('#adult').val() +
+                              "ท่าน" + $('#children')
+                              .val() + "ท่าน",
+                            "flex": 5,
+                            "size": "sm",
+                            "color": "#666666",
+                            "wrap": true
+                          }
+                        ]
+                      },
+                      {
+                        "type": "box",
+                        "layout": "baseline",
+                        "spacing": "sm",
+                        "contents": [{
+                            "type": "text",
+                            "text": "โทรศัพท์",
+                            "flex": 1,
+                            "size": "sm",
+                            "color": "#AAAAAA"
+                          },
+                          {
+                            "type": "text",
+                            "text": $('#phone').val(),
+                            "flex": 5,
+                            "size": "sm",
+                            "color": "#666666",
+                            "wrap": true
+                          }
+                        ]
+                      },
+                      {
+                        "type": "box",
+                        "layout": "baseline",
+                        "spacing": "sm",
+                        "contents": [{
+                            "type": "text",
+                            "text": "เวลา",
+                            "flex": 1,
+                            "size": "sm",
+                            "color": "#AAAAAA"
+                          },
+                          {
+                            "type": "text",
+                            "text": $("#date").val() + "\n" + "⏱เวลารับประทานอาหาร: " + session + ' ' + start +
+                              entire_line,
+                            "flex": 5,
+                            "size": "sm",
+                            "color": "#666666",
+                            "wrap": true
+                          }
+                        ]
+                      },
+                      {
+                        "type": "box",
+                        "layout": "baseline",
+                        "spacing": "sm",
+                        "contents": [{
+                            "type": "text",
+                            "text": "備註",
+                            "flex": 1,
+                            "size": "sm",
+                            "color": "#AAAAAA"
+                          },
+                          {
+                            "type": "text",
+                            "text": ps,
+                            "flex": 5,
+                            "size": "sm",
+                            "color": "#666666",
+                            "wrap": true
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              "footer": {
+                "type": "box",
+                "layout": "vertical",
+                "flex": 0,
+                "spacing": "sm",
+                "contents": [{
+                  "type": "button",
+                  "action": {
+                    "type": "uri",
+                    "label": "สอบถาม / ยกเลิกการจอง",
+                    "uri": "line://app/1577114898-D5d8edOv"
+                  },
+                  "color": "#2C9278",
+                  "height": "sm",
+                  "style": "primary"
+                }]
+              }
+            }
+          }])
+          .then(() => {
+            setTimeout(function () {}, 1000);
+            liff.closeWindow();
+          })
+          .catch((err) => {
+            // console.log('error', err);
+          });
+
+      });
+
+
+
+    })
+  </script>
+
+
+
+  <!--script jquery -->
+  <script>
+    $(document).ready(function () {
+
+
+      //if phonenumber is not correct, then show the alert message and clean phone value.
+      $('#phone').change(function () {
+        var phone = $('#phone').val();
+        var username = $('#username').val();
+        
+        if (reg_phone.test(phone) == false) {
+          alert('รูปแบบหมายเลขโทรศัพท์ไม่ถูกต้อง!!');
+          $('#phone').val('');
+          $("button[name='phone_button']").attr("disabled", true);
+        } else if (username != '' && phone != '' && $('#privacy_policy').is(':checked')) {
+          $("button[name='phone_button']").attr("disabled", false);
+        }
+      });
+      // //if privacy_policy checkbox is checked, then phone_button of attribution will be disabled.
+      $('#privacy_policy').click(function () {
+        var username = $('#username').val();
+        var phone = $('#phone').val();
+        
+        if ($('#privacy_policy').is(':checked') && phone != '' && username != '') {
+          $("button[name='phone_button']").attr("disabled", false);
+        } else if ($('#privacy_policy').is(':checked') == false || phone == '' || username == '') {
+          $("button[name='phone_button']").attr("disabled", true);
+        }
+      });
+
+      //if date's value changes, then the session button of attribution disabled will be removed.
+      $("#date").change(function () {
+        $("button[name='session']").removeAttr('disabled')
+        document.getElementById('timeForm_1').classList.remove("w3-show")
+        document.getElementById('timeForm_2').classList.remove("w3-show")
+        document.getElementById('noonTime').innerHTML = "อาหารจีน"
+        document.getElementById('nightTime').innerHTML = "อาหารเย็น"
+        document.getElementById('noonTime').classList.remove("w3-teal");
+        document.getElementById('nightTime').classList.remove("w3-teal");
+        document.getElementsByName('session').val = ''
+        var booking_date = $('#date').val();
+        data_noon = {
+          'time_session': 'noon',
+          'booking_date': booking_date,
+          'action': 'querying_num'
+        }
+        query_people(data_noon);
+        data_night = {
+          'time_session': 'night',
+          'booking_date': booking_date,
+          'action': 'querying_num'
+        }
+        query_people(data_night);
+
+      });
+
+      //if adult's value changes, then the session button of attribution disabled will be removed.
+      $("#adult").change(function () {
+        document.getElementById('timeForm_1').classList.remove("w3-show")
+        document.getElementById('timeForm_2').classList.remove("w3-show")
+        document.getElementById('noonTime').innerHTML = "อาหารจีน"
+        document.getElementById('nightTime').innerHTML = "อาหารเย็น"
+        document.getElementById('noonTime').classList.remove("w3-teal");
+        document.getElementById('nightTime').classList.remove("w3-teal");
+        $("#noonTime").attr("disabled", true);
+        $("#nightTime").attr("disabled", true);
+        var booking_date = $('#date').val();
+        data_noon = {
+          'time_session': 'noon',
+          'booking_date': booking_date,
+          'action': 'querying_num'
+        }
+        query_people(data_noon)
+        data_night = {
+          'time_session': 'night',
+          'booking_date': booking_date,
+          'action': 'querying_num'
+        }
+        query_people(data_night)
+      });
+
+      //if children's value changes, then the session button of attribution disabled will be removed.
+      $("#children").change(function () {
+        document.getElementById('timeForm_1').classList.remove("w3-show")
+        document.getElementById('timeForm_2').classList.remove("w3-show")
+        document.getElementById('noonTime').innerHTML = "อาหารจีน"
+        document.getElementById('nightTime').innerHTML = "อาหารเย็น"
+        document.getElementById('noonTime').classList.remove("w3-teal");
+        document.getElementById('nightTime').classList.remove("w3-teal");
+        $("#noonTime").attr("disabled", true);
+        $("#nightTime").attr("disabled", true);
+        var booking_date = $('#date').val();
+        data_noon = {
+          'time_session': 'noon',
+          'booking_date': booking_date,
+          'action': 'querying_num'
+        }
+        query_people(data_noon)
+        data_night = {
+          'time_session': 'night',
+          'booking_date': booking_date,
+          'action': 'querying_num'
+        }
+        query_people(data_night)
+      });
+
+      //if startTime button be clicked, then the next button of disabled attribution will be removed.
+      $("button[name='startTime']").click(function () {
+        $("#next").removeAttr('disabled')
+      })
+    });
+
+    $(function () {
+      $('#sendbook').click(function (e) {
+        var status = true;
+        var action = 'booking';
+        //userid
+        var userid = $('#userid').val();
+        // ชื่อ
+        var name = $('#username').val();
+        //linename
+        var linename = disname_json;
+        // 電話
+        var phone = $('#phone').val();
+        // 訂位วันที่
+        var booking_date = $('#date').val();
+        // 訂位開始
+        var booking_start = $('#start').val();
+        //時段
+        var time_session = $('#session').val();
+        // 人數
+        var adult = $('#adult').val();
+        var children = $('#children').val();
+        // 店家
+        var store = $('#store_name').val();
+        //พฤติกรรมการกิน
+        var ps = $('#ps').val() + $('#otherps').val();
+        //價位
+        var price = $('#price').val();
+        //包場
+        var entire = $('#entiretime').val();
+        // 電話(除錯)
+        
+
+        if (entire == '') {
+          entire = 'false';
+        }
+
+        if (price == '') {
+          alert('กรุณาเลือกราคา!');
+          status = false;
+        }
+
+        if (status) {
+
+          var data = {
+            'userid': userid,
+            'username': name,
+            'linename': linename,
+            'phone': phone,
+            'booking_date': booking_date,
+            'booking_start_time': booking_start,
+            'time_session': time_session,
+            'store': store,
+            'adult': adult,
+            'children': children,
+            'price': price,
+            'ps': ps,
+            'entire_time': entire,
+            'action': action,
+          }
+
+          $("#sendbook").attr("disabled", true);
+          // 呼叫 send ajax function
+          send(data);
+        }
+
+      });
+    });
+
+    function query_people(data) {
+      $.ajax({
+        type: "get",
+        url: "https://script.google.com/macros/s/AKfycbz4QU7y1coY0DPM8sBFumKxKabm7xOVtIxE0Lzt4IMz-qTmH6w/exec",
+        data: data,
+        success: function (response) {
+          var number = parseInt(response.result);
+          var time_session = response.time_session;
+          var entire_time = response.entire_time;
+
+          // var userid = 'U5ee811f1f2f899eb66844500ef14a371';
+          // var phone = '0900123123';
+          // console.log(phone)
+
+          // if (userid == $('#userid').val() && phone != '') {
+          //   document.getElementById('memberform').style.display = 'none';
+          //   document.getElementById('time').style.display = 'block'
+          // }
+
+          if (number == 0) {
+            if (time_session == 'noon') {
+              document.getElementById('noon_num').innerHTML = ('ที่เหลืออยู่ ' + (20) + ' ที่นั่ง');
+              $("#noonTime").attr("disabled", false);
+              $("button[name='startTime']").attr("disabled", false);
+            } else {
+              document.getElementById('night_num').innerHTML = ('ที่เหลืออยู่ ' + (20) + ' ที่นั่ง');
+              $("#nightTime").attr("disabled", false);
+              $("button[name='startTime']").attr("disabled", false);
+            }
+          } else if (number < 16 && parseInt($('#adult').val()) + parseInt($('#children').val()) <= (16 - number)) {
+            if (time_session == 'noon') {
+              document.getElementById('noon_num').innerHTML = ('ที่เหลืออยู่ ' + (16 - number) + ' ที่นั่ง');
+              $("#noonTime").attr("disabled", false);
+              $("button[name='startTime']").attr("disabled", false);
+            } else {
+              document.getElementById('night_num').innerHTML = ('ที่เหลืออยู่ ' + (16 - number) + ' ที่นั่ง');
+              $("#nightTime").attr("disabled", false);
+              $("button[name='startTime']").attr("disabled", false);
+            }
+          }
+          
+          if (number >= 16) {
+            if (time_session == 'noon') {
+              document.getElementById('noon_num').innerHTML = ('เต็ม');
+              $("button[name='startTime']").attr("disabled", true);
+            } else {
+              document.getElementById('night_num').innerHTML = ('เต็ม');
+              $("button[name='startTime']").attr("disabled", true);
+            }
+          } 
+          if (parseInt($('#adult').val()) + parseInt($('#children').val()) > (16 - number)) {
+            if (time_session == 'noon') {
+              
+              $("#noonTime").attr("disabled", true);
+            } else {
+              
+              $("#nightTime").attr("disabled", true);
+            }
+          } 
+          
+
+          if (time_session == 'noon' && entire_time == 'TRUE') {
+            document.getElementById('noon_num').innerHTML = ('เต็ม');
+            $("button[name='startTime']").attr("disabled", true);
+          } else if (time_session == 'night' && entire_time == 'TRUE') {
+            document.getElementById('night_num').innerHTML = ('เต็ม');
+            $("button[name='startTime']").attr("disabled", true);
+          }
+
+
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+          alert('ไม่สามารถรับหมายเลขที่เหลือในงวดนี้โปรดคลิกอีกครั้ง');
+        }
+      })
+    }
+
+    function query_member(data) {
+      $.ajax({
+        type: "get",
+        url: "https://script.google.com/macros/s/AKfycbz4QU7y1coY0DPM8sBFumKxKabm7xOVtIxE0Lzt4IMz-qTmH6w/exec",
+        data: data,
+        success: function (response) {
+          var userid = response.userid;
+          var phone = response.phone;
+          var username = response.username;
+          console.log(name)
+
+          if (userid == $('#userid').val() && phone != '') {
+            document.getElementById('memberform').style.display = 'none';
+            document.getElementById('time').style.display = 'block';
+            document.getElementById('spinner').style.display = 'none';
+            $('#phone').val(phone);
+            $('#username').val(username);
+          } else {
+            document.getElementById('memberform').style.display = 'block';
+            document.getElementById('spinner').style.display = 'none';
+          }
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+          alert('ไม่สามารถรับข้อมูลสมาชิก!');
+        }
+      })
+    }
+
+    function send(data) {
+      $.ajax({
+        type: "get",
+        url: "https://script.google.com/macros/s/AKfycbz4QU7y1coY0DPM8sBFumKxKabm7xOVtIxE0Lzt4IMz-qTmH6w/exec",
+        data: data,
+        success: function (response) {
+          if (response.result == 'error') {
+            $("#sendbook").attr("disabled", false);
+          } else if (response.result == 'full') {
+            bk_st = parseFloat(data.booking_start_time) * 60
+            if (bk_st % 60 != 0) {
+              bk_st = parseInt(bk_st / 60).toString() + ':' + (bk_st % 60).toString()
+            } else {
+              bk_st = (bk_st / 60).toString() + ':00'
+            }
+
+            $("#sendbook").attr("disabled", false);
+            $('#start').val('');
+            alert('เสียใจมาก! !' + bk_st + " ถึง " + " การจองเต็มแล้วโปรดเลือกช่วงเวลาอื่น")
+          } else {
+            $("#sendbook").attr("disabled", false);
+            $('#name').val('');
+            $('#phone').val('');
+            $('#store_name').val('');
+            $('#adult').val('');
+            $('#children').val('');
+            $('#start').val('');
+            alert('ขอบคุณสำหรับการจอง!!');
+          }
+
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+          $("#sendbook").attr("disabled", false);
+          $('#name').val('');
+          $('#phone').val('');
+          $('#store_name').val('');
+          $('#adult').val('');
+          $('#children').val('');
+          $('#start').val('');
+          alert('ขออภัยการจองล้มเหลว !!')
+        }
+      });
+    }
+  </script>
+
+</body>
+
+</html>
